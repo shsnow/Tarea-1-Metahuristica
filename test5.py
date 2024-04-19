@@ -54,11 +54,22 @@ class ProjectSelection:
         return True
 
     def mfc_search(self):
-        for project in range(self.m):
+        # Crear una lista de tuplas que contengan la ganancia del proyecto y su índice
+        project_gains = [(self.profits[i], i) for i in range(self.m)]
+        # Ordenar la lista de proyectos por ganancia en orden descendente
+        project_gains.sort(reverse=True)
+        
+        # Recorremos los proyectos ordenados por ganancia
+        for gain, project in project_gains:
+            # Verificamos si las restricciones permiten seleccionar el proyecto
             if self.restrictions(project, self.tasks[project], self.costs):
+                # Si es posible, seleccionamos el proyecto y continuamos con la búsqueda
                 continue
+
+            # Si no es posible seleccionar el proyecto, pasamos al siguiente en la lista
             else:
                 continue
+
 
 
 def main():
